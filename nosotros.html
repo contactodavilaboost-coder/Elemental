@@ -47,8 +47,8 @@
     <!-- SECCIÓN 2: LO QUE NOS DEFINE (Medio) -->
     <section class="n-define">
         <div class="container">
-            <h2 class="n-titulo-azul">LO QUE NOS DEFINE</h2>
-            <p class="n-subtitulo-gris">Creemos que la calidad del servicio es tan importante como la del producto. Por eso, hemos diseñado un modelo de negocio donde la rapidez y la eficacia son nuestras prioridades. Si tu termo falla, estamos ahí; si necesitas renovarlo, te llevamos lo mejor a casa.</p>
+            <h2 class="n-titulo-azul reveal">LO QUE NOS DEFINE</h2>
+            <p class="n-subtitulo-gris reveal">Creemos que la calidad del servicio es tan importante como la del producto. Por eso, hemos diseñado un modelo de negocio donde la rapidez y la eficacia son nuestras prioridades. Si tu termo falla, estamos ahí; si necesitas renovarlo, te llevamos lo mejor a casa.</p>
             
             <div class="n-grid-iconos">
                 <div class="n-item">
@@ -80,8 +80,8 @@
     <section class="n-valores">
         <div class="n-valores-overlay">
             <div class="container">
-                <h2 class="n-titulo-blanco">NUESTROS VALORES</h2>
-                <p class="n-subtitulo-blanco">Para nosotros, cada cliente es un vecino al que queremos ayudar a mejorar su calidad de vida, ofreciéndole los mejores termos eléctricos del mercado y un soporte técnico que siempre responde.</p>
+                <h2 class="n-titulo-blanco reveal">NUESTROS VALORES</h2>
+                <p class="n-subtitulo-blanco reveal">Para nosotros, cada cliente es un vecino al que queremos ayudar a mejorar su calidad de vida, ofreciéndole los mejores termos eléctricos del mercado y un soporte técnico que siempre responde.</p>
                 
                 <div class="n-grid-valores">
                     <div class="n-valor-box">
@@ -101,5 +101,25 @@
         </div>
     </section>
 
-</body>
 
+    <script>
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+        // Stagger automático en grids
+        document.querySelectorAll('.n-grid-iconos > *, .n-grid-valores > *').forEach(el => {
+            const idx = Array.from(el.parentElement.children).indexOf(el);
+            el.classList.add('reveal');
+            el.style.transitionDelay = `${idx * 0.13}s`;
+            io.observe(el);
+        });
+    </script>
+</body>

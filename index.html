@@ -45,9 +45,9 @@
     <!-- Servicios -->
     <section class="services">
         <div class="container">
-            <h2 class="section-title">NUESTROS SERVICIOS</h2>
-            <p class="section-subtitle">Nuestra empresa está conformada por un equipo de ingenieros y técnicos especializados en sistemas de agua caliente sanitaria...</p>
-            
+            <h2 class="section-title reveal">NUESTROS SERVICIOS</h2>
+            <p class="section-subtitle reveal">Nuestra empresa está conformada por un equipo de ingenieros y técnicos especializados en sistemas de agua caliente sanitaria...</p>
+
             <div class="services-grid">
                 <div class="service-card">
                     <img src="img/servicio-1.jpg" alt="Instalación">
@@ -68,24 +68,24 @@
                     </div>
                 </div>
             </div>
-            <a href="#" class="btn-blue">SABER MÁS</a>
+            <a href="#" class="btn-blue reveal">SABER MÁS</a>
         </div>
     </section>
 
     <!-- Promo 10% -->
     <section class="promo">
         <div class="container promo-content">
-            <h2><span>10%</span></h2>
-            <h2>DE DESCUENTO <br> EN LA 2ª MANTENCIÓN</h2>
+            <h2 class="reveal"><span>10%</span></h2>
+            <h2 class="reveal">DE DESCUENTO <br> EN LA 2ª MANTENCIÓN</h2>
         </div>
     </section>
-    
+
     <!-- Por qué elegirnos -->
     <section class="why-us">
         <div class="container">
-            <h2 class="section-title white">¿POR QUÉ ELEGIRNOS?</h2>
-            <p class="section-subtitle white">Elegir un servicio integral ofrece la tranquilidad de obtener el equipo adecuado...</p>
-            
+            <h2 class="section-title white reveal">¿POR QUÉ ELEGIRNOS?</h2>
+            <p class="section-subtitle white reveal">Elegir un servicio integral ofrece la tranquilidad de obtener el equipo adecuado...</p>
+
             <div class="why-grid">
                 <div class="why-item">
                     <i class="fas fa-tools"></i>
@@ -103,5 +103,26 @@
         </div>
     </section>
 
+    <script>
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        // Elementos con clase reveal manual
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+        // Stagger automático en grids
+        document.querySelectorAll('.services-grid > *, .why-grid > *').forEach(el => {
+            const idx = Array.from(el.parentElement.children).indexOf(el);
+            el.classList.add('reveal');
+            el.style.transitionDelay = `${idx * 0.13}s`;
+            io.observe(el);
+        });
+    </script>
 </body>
 </html>
